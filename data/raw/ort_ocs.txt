@@ -1,0 +1,3 @@
+https://stackoverflow.com/questions/55644760/calculate-hours-in-day-and-night-based-on-start-time-and-end-time-in-r
+
+https://stackoverflow.com/questions/21409903/choosing-rows-containing-only-times-between-time-x-and-time-y?rq=1
