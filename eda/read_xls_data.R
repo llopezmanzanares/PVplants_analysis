@@ -20,4 +20,15 @@ pv_e <- read_xls("data/raw/200802_8_Plantas.xls", sheet = 1) %>%
 save(pv_e, file = "data/processed/pv_e.RData")
 
 # plants characteristics
-pv_c <- read_xls("data/raw/200802_8_Plantas.xls", sheet = 2)
+pv_c <- read_xls("data/raw/200802_8_Plantas.xls", sheet = 2) %>% 
+  rename(
+    id = planta,
+    cod = `CÓDIGO`,
+    geom = `geometría`,
+    n_mods = `# módulos`,
+    pn = `P nominal (kW)`,
+    pf = `P flashing (kW)`,
+    mt = `LÍNEA MT`
+  )
+
+save(pv_c, file = "data/processed/pv_c.RData")
