@@ -14,6 +14,7 @@ pv_e <- read_xls("data/raw/200802_8_Plantas.xls") %>%
       format = "%d/%m/%Y %H:%M"
     )
   ) %>% 
+  filter(!is.na(date)) %>% 
   select(-time)
 
 save(pv_e, "data/processed/pv_e")
