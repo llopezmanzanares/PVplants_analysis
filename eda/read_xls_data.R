@@ -2,3 +2,18 @@
 
 library(tidyverse)
 library(readxl)
+
+pv_e <- read_xls("data/raw/200802_8_Plantas.xls") %>% 
+  rename(
+    date = Fecha,
+    time = Hora
+  ) %>% 
+  mutate(
+    date = strptime(
+      str_c(date, time, sep=" "),
+      format = "%d/%m/%Y %H:%M"
+    )
+  ) %>% 
+  select(-time)
+
+save(pv_e, "data/processed/pv_e")
