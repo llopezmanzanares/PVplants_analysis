@@ -3,7 +3,7 @@
 library(tidyverse)
 library(readxl)
 
-pv_e <- read_xls("data/raw/200802_8_Plantas.xls") %>% 
+pv_e <- read_xls("data/raw/200802_8_Plantas.xls", sheet = 1) %>% 
   rename(
     date = Fecha,
     time = Hora
@@ -18,3 +18,6 @@ pv_e <- read_xls("data/raw/200802_8_Plantas.xls") %>%
   select(-time)
 
 save(pv_e, file = "data/processed/pv_e.RData")
+
+# plants characteristics
+pv_c <- read_xls("data/raw/200802_8_Plantas.xls", sheet = 2)
