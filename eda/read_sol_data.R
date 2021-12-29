@@ -14,3 +14,13 @@ ss <- scan(
   str_replace_all(., ";;;;;;", "; ; ;") %>% 
   str_split(., ";", simplify = T)    # generate a matrix structure
 
+ss_ds <- as_tibble(ss)
+# names to the dataset
+names(ss_ds) <-
+  c(
+    "n_dia",
+    str_c(
+      rep(month.abb, each=2),
+      c("_ort", "_ocs")
+      )
+    )
