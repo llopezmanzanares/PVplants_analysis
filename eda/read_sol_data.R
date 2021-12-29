@@ -14,7 +14,7 @@ ss <- scan(
   str_replace_all(., ";;;;;;", "; ; ;") %>% 
   str_split(., ";", simplify = T)    # generate a matrix structure
 
-ss_ds <- as_tibble(ss)
+ss_ds <- as_tibble(ss, .name_repair = "unique")
 # names to the dataset
 names(ss_ds) <-
   c(
@@ -24,3 +24,10 @@ names(ss_ds) <-
       c("_ort", "_ocs")
       )
     )
+
+ss_ds <- ss_ds %>% 
+  pivot_longer(
+    -n_dia,
+    names_to = "tipo",
+    values_to = "hora"
+  )
