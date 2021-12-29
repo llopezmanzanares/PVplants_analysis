@@ -53,3 +53,5 @@ s_rs <- s_rs %>%
     fecha = as.Date(fecha, "%Y/%m/%e")
   ) %>% 
   select(fecha, time, rs)
+
+save(s_rs, file = "data/processed/sunriseset.RData")
