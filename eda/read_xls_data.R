@@ -9,13 +9,15 @@ pv_e <- read_xls("data/raw/200802_8_Plantas.xls", sheet = 1) %>%
     time = Hora
   ) %>% 
   mutate(
-    date = strptime(
-      str_c(date, time, sep=" "),
-      format = "%d/%m/%Y %H:%M"
-    )
-  ) %>% 
+    date = as.Date(date, "%d/%m/%Y"),
+    time = lubridate::hm(time)
+    ) %>% 
   filter(!is.na(date)) %>% 
-  select(-time)
+  pivot_longer(
+    -c(date, time),
+    names_to = "plant_id",
+    values_to = "kW"
+  )
 
 save(pv_e, file = "data/processed/pv_e.RData")
 
