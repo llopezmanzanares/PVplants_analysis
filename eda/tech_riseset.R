@@ -7,7 +7,7 @@ library(tidyverse)
 load("data/processed/pv_e.RData")
 
 
-#tech_ss <- pv_e %>% 
+tech_ss <- pv_e %>% 
   group_by(date, time) %>% 
   summarise(
     e_kw = sum(kW),    # Energy production per hour
