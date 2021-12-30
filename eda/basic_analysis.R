@@ -42,6 +42,7 @@ totals_day <- pv_e %>%
   ) %>% 
   ungroup()
 
+# daily data graphs
 ggplot(totals_day, aes(date, kwh)) +
   geom_line(aes(color = plant_id)) +
   geom_smooth() +
@@ -57,3 +58,29 @@ ggplot(totals_day, aes(date, kwh)) +
     color = NULL
   ) +
   theme_minimal()
+
+# monthly data graphs
+ggplot(totals_month, aes(as.factor(month), kwh)) +
+  geom_col(fill = "gold3") +
+  facet_wrap(~plant_id, ncol = 1) +
+  labs(
+    title = "Energy production per month",
+    subtitle = "kWh",
+    x = "Month",
+    y = "kWh"
+  ) +
+  theme_minimal()
+
+
+# Integration factor analysis ------------------------------------------------------
+
+load("data/processed/tech_ss.RData")
+
+# production time, sun hours
+prod_time <- pv_e %>% 
+  pivot_wider(
+    names_from = "plant_id",
+    values_from = "kW",
+    values_fn = mean
+  ) %>% 
+  left_join(tech_ss, by = "date")
