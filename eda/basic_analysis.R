@@ -83,4 +83,10 @@ prod_time <- pv_e %>%
     values_from = "kW",
     values_fn = mean
   ) %>% 
-  left_join(tech_ss, by = "date")
+  left_join(tech_ss, by = "date") %>% 
+  mutate(
+    time = as.numeric(time)/3600,
+    dl = if_else(time >= sunrise & time <= sunset, T, F)
+  ) %>% 
+  filter(dl) %>% 
+  select(date:`6E`)
