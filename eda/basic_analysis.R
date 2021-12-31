@@ -89,4 +89,14 @@ prod_time <- pv_e %>%
     dl = if_else(time >= sunrise & time <= sunset, T, F)
   ) %>% 
   filter(dl) %>% 
-  select(date:`6E`)
+  select(date:`6E`) %>% 
+  pivot_longer(
+    -c("date", "time"),
+    names_to = "plant_id",
+    values_to = "kw"
+  )
+
+ggplot(prod_time, aes(kw)) +
+  geom_histogram(binwidth = 1) +
+  facet_wrap(~plant_id, ncol = 1) +
+  theme_minimal()
